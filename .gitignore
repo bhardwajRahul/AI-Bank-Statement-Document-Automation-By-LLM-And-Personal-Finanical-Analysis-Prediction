@@ -1,15 +1,17 @@
-# Byte-compiled / optimized / DLL files
+# ============================================================
+# AI Bank Statement Automation - .gitignore
+# Updated for new project structure (June 2026)
+# ============================================================
+
+# ----------------------
+# Python
+# ----------------------
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 *.pyd
 *.pyo
-
-# C extensions
-*.so
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -23,250 +25,99 @@ parts/
 sdist/
 var/
 wheels/
-share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
 
-# PyInstaller
-*.manifest
-*.spec
+# ----------------------
+# Virtual Environments
+# ----------------------
+.venv
+venv/
+ENV/
+env/
+.conda/
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-.pybuilder/
-target/
-
-# Jupyter Notebook
+# ----------------------
+# Jupyter Notebooks
+# ----------------------
 .ipynb_checkpoints
 *.ipynb_checkpoints/
 
-# IPython
-profile_default/
-ipython_config.py
+# ----------------------
+# Data & Large Files (Important for this project)
+# ----------------------
+data/uploads/
+data/processed/
+data/vector_stores/
+chroma_db/
+faiss_index/
+*.pt
+*.pth
+*.onnx
+*.safetensors
+wandb/
+mlruns/
+mlflow/
 
-# pyenv
-.python-version
-
-# pipenv
-Pipfile.lock
-
-# poetry
-poetry.lock
-
-# pdm
-.pdm.toml
-.pdm-python
-.pdm-build/
-
-# PEP 582
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
+# ----------------------
+# Environment & Secrets
+# ----------------------
 .env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-.conda/
+.env.*
+!.env.example
 
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
+# ----------------------
 # IDE / Editor
+# ----------------------
 .idea/
 .vscode/
 *.swp
 *.swo
 *~
+.DS_Store
+Thumbs.db
 
-# macOS
+# ----------------------
+# Logs & Temporary Files
+# ----------------------
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# ----------------------
+# Docker
+# ----------------------
+docker-compose.override.yml
+
+# ----------------------
+# Testing & Coverage
+# ----------------------
+.coverage
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+coverage.xml
+*.cover
+
+# ----------------------
+# Build / Distribution
+# ----------------------
+*.manifest
+*.spec
+dist/
+build/
+
+# ----------------------
+# OS Generated
+# ----------------------
 .DS_Store
 .AppleDouble
 .LSOverride
-
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Linux
-*~
-
-# ==========================================
-# AI / ML / Data Science specific (NEW)
-# ==========================================
-
-# Vector databases & embeddings (Chroma, FAISS, etc.)
-chroma_db/
-faiss_index/
-*.chroma
-*.faiss
-vector_store/
-embeddings/
-
-# ML model weights & checkpoints
-*.pt
-*.pth
-*.onnx
-*.pb
-*.h5
-*.ckpt
-*.safetensors
-yolov*/
-yolo*/
-runs/
-checkpoints/
-models/*.pt
-models/*.pth
-
-# Experiment tracking & logging
-wandb/
-mlruns/
-mlflow/
-tensorboard/
-lightning_logs/
-comet/
-opik_cache/
-
-# Large data directories (raw PDFs, test documents, outputs)
-data/
-raw/
-processed/
-outputs/
-results/
-artifacts/
-src/test-document/*.pdf
-src/test-document/large*/
-src/dev/*.pdf
-
-# CrewAI / Agent specific caches
-.crew/
-crewai_cache/
-skills_cache/
-
-# LLM / RAG caches
-.cache/
-litellm_cache/
-ollama_cache/
-
-# Ultralytics / YOLO specific
-ultralytics/
-runs/detect/
-runs/segment/
-runs/pose/
-
-# Hugging Face
-huggingface/
-.cache/huggingface/
-transformers_cache/
-
-# ==========================================
-# Project specific
-# ==========================================
-
-# Virtual environment scripts outputs
-src/venv/
-src/.venv/
-
-# Local notebooks outputs (keep source .ipynb but ignore heavy outputs)
-src/dev/outputs/
-src/dev/*.html
-src/dev/*.log
-
-# Environment & secrets (keep .env.example tracked)
-.env.*
-!.env.example
-
-# Large binary media (videos, images generated)
-*.mp4
-*.avi
-*.mov
-*.wmv
-*.flv
-*.mkv
-*.webm
-generated_videos/
-*.png
-*.jpg
-*.jpeg
-!docs/*.png
-!docs/*.jpg
-!assets/*.png
-!assets/*.jpg
-
-# Docker
-docker-compose.override.yml
-
-# OS generated
 ._*
 .Spotlight-V100
 .Trashes

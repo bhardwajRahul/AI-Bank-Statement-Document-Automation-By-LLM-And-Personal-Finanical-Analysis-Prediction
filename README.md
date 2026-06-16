@@ -37,19 +37,50 @@ This project converts unstructured bank statement PDFs into structured data usin
 
 ## 📁 Repository Structure
 ```
-src/
-├── dev/                    # Jupyter notebooks for development & testing
-│   ├── ai_bank_statement_dev.ipynb
+AI-Bank-Statement-Document-Automation/
+├── backend/
+│   ├── app/
+│   │   ├── core/
+│   │   │   ├── config.py
+│   │   │   └── logging.py
+│   │   ├── models/
+│   │   │   └── schemas.py
+│   │   ├── services/
+│   │   │   ├── document_processor.py      # YOLO + OCR + LLM extraction
+│   │   │   ├── rag_service.py
+│   │   │   ├── agent_service.py           # CrewAI + LangGraph + deepagents
+│   │   │   └── financial_service.py
+│   │   ├── utils/
+│   │   │   ├── pdf_utils.py
+│   │   │   └── embedding_utils.py
+│   │   └── main.py
+│   ├── tests/
+│   └── pyproject.toml
+├── frontend/
+│   └── streamlit_app/
+│       ├── pages/
+│       ├── components/
+│       └── app.py
+├── notebooks/
 │   ├── ai_agent_dev.ipynb
-│   └── RAG_algorithm_test.ipynb
-├── apps.py                 # Streamlit web application
-├── bank-statement-document/ # Core processing scripts
-├── yolo-base-layout-analysis/
-├── faiss_index/ & chroma_db/
-├── test-document/          # Sample PDFs for testing
-├── *.sh                    # Installation & setup scripts
-├── requirements.txt
-└── .env.example
+│   ├── ai_bank_statement_dev.ipynb
+│   ├── RAG_algorithm_test.ipynb
+│   ├── multimodal-rag-test.ipynb
+│   └── pii_detection.ipynb
+├── data/
+│   ├── uploads/                    # Uploaded bank statements
+│   ├── processed/                  # Extracted structured data
+│   └── vector_stores/              # chroma_db, faiss_index
+├── docker/
+│   └── docker-compose.yml
+├── scripts/
+│   ├── setup.sh
+│   └── download_models.sh
+├── docs/
+├── .env.example
+├── .gitignore
+├── README.md
+└── pyproject.toml
 ```
 
 
