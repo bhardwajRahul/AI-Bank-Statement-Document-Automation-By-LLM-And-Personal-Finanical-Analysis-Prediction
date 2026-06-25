@@ -19,7 +19,6 @@ PyYAML==6.0.2
 instructor==1.15.1
 google-generativeai
 langchain-google-genai
-langchain-ollama==0.3.3          # pinned - works well with current Ollama
 litellm==1.79.2   #>=1.79.2  #1.73.6                  # pinned - unified LLM calls
 
 # --- RAG & Vector Stores ---
@@ -27,6 +26,7 @@ langchain==0.3.25
 langchain-community==0.3.24
 langchain-text-splitters==0.3.8
 langchain-chroma==0.2.6
+langchain-qdrant
 langchain-huggingface==0.2.0
 chromadb>=1.0.20
 faiss-cpu==1.10.0
@@ -76,7 +76,7 @@ sentence-transformers==4.1.0
 datasets==3.6.0
 huggingface_hub==0.31.2
 mlflow==3.13.0
-
+jupyterlab
 
 # --- Compatibility Pins ---
 rich #==13.9.4
