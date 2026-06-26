@@ -29,6 +29,10 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+# mlflow db ----------------------
+mlrun/*
+*mlflow.db
+
 
 # ----------------------
 # Virtual Environments
