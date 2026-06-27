@@ -19,6 +19,20 @@
 - **Financial Intelligence** — Income/expense categorization, trend analysis, and natural language querying
 - **Async Ready** — Modern async LLM calls for better performance with CrewAI
 - **Development Notebook** — Rich Jupyter notebook for experimentation and rapid iteration
+- **MLflow Integration** — Trace and monitor LLM calls and full AI agent workflows
+
+---
+
+## ⚠️ Important Notes for Local LLMs (LM Studio / Ollama)
+
+When using **local models** via LM Studio or Ollama, please follow these recommendations for best performance:
+
+- **Model Size**: Use models with **9B parameters or larger** (e.g. `Qwen2.5-14B`, `Qwen3-27B`, `Gemma-2-9B`, `Llama-3.1-8B` or above). Smaller models (7B and below) significantly reduce output quality and reasoning ability.
+- **Context Length**: Set **context size to 16K tokens or higher** (recommended **32K+**). Lower context sizes (e.g. 8K) often cause the agent to lose important instructions and produce incomplete or incorrect results.
+- **JSON Output Weakness**: Local LLMs generally perform **poorly** with strict JSON/structured output. They tend to mix reasoning with JSON or fail validation.  
+  **Recommendation**: Prefer asking the agent to output **clean Markdown reports** instead of forcing JSON.
+
+> **Tip**: If you must use structured output, consider post-processing the Markdown result with a second LLM call or `instructor` library.
 
 ---
 
@@ -31,13 +45,12 @@
 | **Document Processing**| PyMuPDF, YOLO, OCR                      |
 | **Vector Database**    | Qdrant, Chroma                          |
 | **RAG**                | LangChain + PII redaction               |
+| **Tracing & Monitoring**| MLflow                                  |
 | **Frontend (Optional)**| Streamlit                               |
-| **Evaluation**         | DeepEval, Opik (optional)               |
 
 ---
 
 ## 📁 Project Structure
-
 
 ```bash
 AI-Bank-Statement-Document-Automation/
@@ -49,7 +62,7 @@ AI-Bank-Statement-Document-Automation/
 │       │   ├── bank-statement-parsing/
 │       │   ├── financial-analysis/
 │       │   ├── pii-handling/
-│       │   └── rag-query-handling/
+│       │   └── output-formatting/
 │       └── ...
 ├── data/
 │   ├── bank-statement-document/            # Sample PDFs
@@ -58,13 +71,7 @@ AI-Bank-Statement-Document-Automation/
 └── README.md
 ```
 
----
-
-
----
-
 ## 🚀 Quick Start (Local LLM Recommended)
-
 ### 1. Setup Environment
 
 ```bash
@@ -74,45 +81,33 @@ cd AI-Bank-Statement-Document-Automation-By-LLM-And-Personal-Finanical-Analysis-
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+
 ```
 ## 2. Start LM Studio (Recommended)
 
-Open LM Studio
-Load a chat model (e.g. qwen2.5-7b-instruct or gemma-2-9b-it)
-Start the local server on http://localhost:1234
+### Open LM Studio
+- Load a 9B+ model (e.g. qwen2.5-14b-instruct or qwen3-27b)
+- Set Context Length to 16K or higher (32K preferred)
+- Start the local server on http://localhost:1234
 
 ## 3. Run the Main Notebook
-
 ```bash
 jupyter notebook backend/app/core/ai_agent_skills_dev.ipynb
 ```
 
-The notebook includes:
-
-- CrewAI agent setup with LM Studio
-- Async LLM calls
-- Vector DB (Qdrant) with PII protection
-- Bank statement analysis workflow
-
---------------
-
-
 ## 🔧 Key Configuration
-### Using LM Studio (Default in notebook)
+### Using LM Studio (Recommended)
 
 ```python
 llm = LLM(
-    model="openai/qwen2.5-7b-instruct",
+    model="openai/qwen2.5-14b-instruct",   # Use 9B+ model
     base_url="http://localhost:1234/v1",
     api_key="lm-studio",
     temperature=0.6,
-    max_tokens=1024,
+    max_tokens=2048,
 )
-
 ```
-
 ### Async Direct Calls
-
 ```python
 from litellm import acompletion
 
@@ -122,9 +117,20 @@ response = await acompletion(
     api_key="lm-studio",
     messages=[{"role": "user", "content": prompt}]
 )
-
-
 ```
+## MLflow Tracing (Agent Flow Monitoring)
+######  MLflow is integrated to help you trace and debug the full AI agent workflow, including LLM calls, tool usage, and task execution.
+
+```python
+import mlflow
+mlflow.crewai.autolog()
+mlflow.litellm.autolog()
+```
+
+-------------------------------
+You can view the agent execution traces in the MLflow UI.
+
+
 
 
 ## 🗺 Roadmap
@@ -134,7 +140,6 @@ response = await acompletion(
 - Advanced financial forecasting
 - Docker + Kubernetes deployment
 - Improved Streamlit dashboard with charts
-
 
 ## 📄 License
 This project is licensed under the Apache License 2.0.

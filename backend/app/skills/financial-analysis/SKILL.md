@@ -4,13 +4,19 @@ description: Guidelines for income/expense categorization, trend analysis, and g
 compatibility: crewai>=1.0.0
 ---
 
-# Financial Analysis Guidelines
+# Financial Analysis Skill
 
-When analyzing bank statement data:
+## Rules
+- After parsing transactions, always calculate:
+  - **Opening Balance**
+  - **Closing Balance**
+  - **Total Credits** (sum of all credits)
+  - **Total Debits** (sum of all debits)
+- Cross-verify totals using: `Opening + Total Credits - Total Debits = Closing`
+- When answering "total amount" questions, clearly state whether it refers to **Closing Balance** or **Total Credits/Debits**.
+- Highlight unusual or large transactions when relevant.
+- Never invent or assume values not present in the extracted data.
 
-1. Categorize transactions using both description keywords and amount patterns.
-2. Identify recurring payments, subscriptions, and standing instructions.
-3. Calculate key metrics: monthly income vs expense ratio, average transaction size, and top spending categories.
-4. Flag unusual or high-value transactions for review.
-5. Always provide **source references** (date + amount) when making conclusions.
-6. Generate actionable insights (e.g., “Spending on dining increased 35% this month”).
+## Output Guidelines
+- Present numbers clearly with proper formatting (e.g., $1,234.56).
+- Use tables when showing multiple transactions.

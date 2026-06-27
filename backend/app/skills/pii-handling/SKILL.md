@@ -3,11 +3,11 @@ name: pii-handling
 description: Strict PII detection and redaction rules for financial documents.
 ---
 
-# PII Handling Rules (Strict)
+# PII Handling Skill
 
-- Detect and redact: Account numbers, names, addresses, phone numbers, emails, and transaction references.
-- **Redaction Format**: Replace with `[REDACTED-ACCOUNT-XXXX]` or `[REDACTED-NAME]`.
-- **Before Embedding**: All PII must be redacted before storing in vector database.
-- **Audit Log**: Record what PII was detected (without storing the actual values).
-- Never store raw PII in Chroma/FAISS or any vector store.
-- For Hong Kong bank statements, pay special attention to 10–16 digit account numbers.
+## Mandatory Rules
+- Always redact sensitive information **before** storing data in Vector DB.
+- Redact: Full names, account numbers, addresses, emails, phone numbers.
+- Use the `pii_redaction_tool` for redaction.
+- Never store or output raw PII in final reports unless explicitly required.
+- If PII is detected, mention that redaction was applied (without revealing the original data).

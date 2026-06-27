@@ -4,13 +4,8 @@ description: Best practices for answering financial questions using RAG over ban
 compatibility: crewai>=1.0.0
 ---
 
-# RAG Query Handling Guidelines
+# RAG Query Handling Skill
 
-When answering user questions about bank statements:
-
-1. **Always retrieve first** — Use vector search before answering.
-2. Cite specific transactions (date + amount + description) as evidence.
-3. For trend questions, aggregate data by month or category.
-4. If the answer cannot be found in retrieved documents, clearly state that.
-5. Never hallucinate transaction details.
-6. Prefer structured output (tables or bullet points) for financial summaries.
+## Rules
+- After storing data in Vector DB, **always prefer using the `rag_tool`** to answer questions instead of relying only on memory.
+- Use RAG especially when the document is long or detailed.
